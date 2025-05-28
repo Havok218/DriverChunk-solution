@@ -4,16 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DriverChunk Solution</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
   <style>
+    /* Reset */
     * {
       box-sizing: border-box;
       margin: 0; padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      user-select: none;
+      user-select: none; /* Disable text selection globally */
     }
 
     body {
-      background-color: #121212;
+      background-color: #0f172a;
       color: #e0e0e0;
       min-height: 100vh;
       display: flex;
@@ -26,15 +31,17 @@
       font-size: 2.4rem;
       font-weight: 700;
       color: #60a5fa;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3rem;
       text-align: center;
     }
 
-    .credit {
-      color: #9ca3af;
-      font-size: 1rem;
+    #credit {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #a5b4fc;
       margin-bottom: 1.8rem;
       text-align: center;
+      user-select: none;
     }
 
     main {
@@ -76,6 +83,7 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.85);
       margin-bottom: 1.3rem;
       background-color: #0f172a;
+      user-select: none;
     }
 
     p.description {
@@ -104,6 +112,7 @@
       padding: 0.9rem 1.8rem;
       border-radius: 8px;
       box-shadow: 0 5px 14px rgba(37,99,235,0.85);
+      user-select: none;
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
@@ -124,41 +133,45 @@
       margin: 2rem 0 1rem 0;
       font-weight: 600;
       text-align: center;
+      user-select: none;
       box-shadow: 0 3px 10px rgba(0,0,0,0.7);
+    }
+
+    section.about {
+      background-color: #1e293b;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      color: #cbd5e1;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.8);
+      max-width: 900px;
+      text-align: center;
+      user-select: none;
+    }
+
+    section.readme {
+      background-color: #273449;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      color: #d1d5db;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.7);
+      max-width: 900px;
+      white-space: pre-wrap;
+      font-family: Consolas, "Courier New", monospace;
+      user-select: none;
     }
 
     footer {
       color: #9ca3af;
       font-size: 0.95rem;
+      user-select: none;
       margin-top: auto;
       padding: 1.2rem 0;
       text-align: center;
     }
 
-    section.about,
-    section.readme {
-      background-color: #1f2937;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-top: 2rem;
-      max-width: 900px;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.75);
-    }
-
-    section.about h3,
-    section.readme h3 {
-      color: #93c5fd;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-
-    section.about p,
-    section.readme p {
-      font-size: 1rem;
-      color: #d1d5db;
-      line-height: 1.6;
-    }
-
+    /* Responsive */
     @media (max-width: 700px) {
       main {
         flex-direction: column;
@@ -178,18 +191,19 @@
   DriverChunk Solution 2.0<br />
   Dark Mode & Light Mode Versions
 </header>
-<div class="credit">Developed by Arka Nandy</div>
+<div id="credit">Developed by Arka Nandy</div>
 
 <main>
   <section class="app-version" id="dark-mode-app">
     <img src="darkmode-screenshot.png" alt="DriverChunk Solution 2.0 (Dark) Screenshot" />
     <h2>DriverChunk Solution 2.0 (Dark)</h2>
     <p class="description">
-      Includes <strong>System Information</strong> and <strong>Installed & Required Drivers</strong> in a sleek dark theme.
+      This version includes <strong>System Information</strong> and <strong>Installed & Required Drivers</strong> modules,
+      all styled with a sleek dark mode theme for comfortable viewing in low light.
     </p>
     <p class="features">
-      • CPU, memory, disk, and system info<br />
-      • Shows installed drivers and highlights missing ones
+      • Displays CPU, memory, disk, and system info<br />
+      • Shows installed device drivers and flags missing drivers
     </p>
     <a href="DriverChunkSolution2.0-Dark.zip" class="button-download" download>Download DriverChunk Solution 2.0 (Dark)</a>
   </section>
@@ -198,32 +212,44 @@
     <img src="lightmode-screenshot.png" alt="DriverChunk Solution 2.0 (Light) Screenshot" />
     <h2>DriverChunk Solution 2.0 (Light)</h2>
     <p class="description">
-      Same features as the dark version but in a bright, clean theme for daylight use.
+      This version features the same <strong>System Information</strong> and <strong>Installed & Required Drivers</strong> functionality,
+      presented in a bright and clean light mode theme for easy daytime use.
     </p>
     <p class="features">
-      • CPU, memory, disk, and system info<br />
-      • Shows installed drivers and highlights missing ones
+      • Displays CPU, memory, disk, and system info<br />
+      • Shows installed device drivers and flags missing drivers
     </p>
     <a href="DriverChunkSolution2.0-Light.zip" class="button-download" download>Download DriverChunk Solution 2.0 (Light)</a>
   </section>
 </main>
 
-<section class="notice">
-  <strong>Important:</strong> HTA files are Windows HTML Applications that run scripts on your PC. Only run trusted files. Use antivirus software and keep your system updated.
-</section>
-
-<section class="readme">
-  <h3>README</h3>
+<section class="about" aria-label="About DriverChunk Solution">
+  <h2>About Us</h2>
   <p>
-    DriverChunk Solution 2.0 is a dual-mode HTA application that displays system information, installed drivers, and flags missing drivers with vendor download links. Choose between dark and light themes based on your preference. To run these applications, simply extract the downloaded zip file and double-click the `.hta` file on Windows.
+    DriverChunk Solution is designed to simplify the management of your PC’s drivers and system information.
+    It helps detect missing or outdated drivers and provides easy access to trusted driver sources.
+    This project is developed and maintained by Arka Nandy with the goal of making driver management accessible and reliable.
   </p>
 </section>
 
-<section class="about">
-  <h3>About Us</h3>
-  <p>
-    DriverChunk was created with the vision to simplify driver management and system diagnostics for Windows users. With real-time detection and intuitive interface, it’s crafted to help users identify and address driver issues swiftly and effectively.
-  </p>
+<section class="readme" aria-label="Readme Information">
+DriverChunk Solution 2.0
+
+Features:
+- System Information: Displays CPU, RAM, disk, and OS details.
+- Installed Drivers: Lists all installed device drivers.
+- Missing Drivers & Suggestions: Flags missing drivers and links to vendor sites.
+
+Usage:
+Download and unzip the desired version. Run the included HTA file on Windows systems.
+Ensure to run with administrator rights for full functionality.
+
+Disclaimer:
+Use at your own risk. Always keep backups and update your antivirus software.
+  </section>
+
+<section class="notice" role="alert" aria-live="polite">
+  <strong>Important:</strong> HTA files are Windows HTML Applications that run scripts on your PC. Please run only trusted files. Use antivirus software and keep your system updated.
 </section>
 
 <footer>
