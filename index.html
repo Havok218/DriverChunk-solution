@@ -1,332 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>DriverChunk Solution V.2</title>
-  <HTA:APPLICATION
-    ID="DriverChunk"
-    APPLICATIONNAME="DriverChunk Solution V.2"
-    BORDER="thin"
-    CAPTION="yes"
-    SHOWINTASKBAR="yes"
-    SINGLEINSTANCE="yes"
-    SYSMENU="yes"
-  />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DriverChunk Solution 2.0</title>
   <style>
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
     }
 
     body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: #eef1f5;
-      color: #2c3e50;
-      margin: 30px auto;
-      padding: 0 20px;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #38bdf8;
+      margin-bottom: 0.5rem;
+    }
+
+    header h2 {
+      font-size: 1.25rem;
+      color: #94a3b8;
+      margin-bottom: 0.75rem;
+    }
+
+    header .credit {
+      font-size: 1rem;
+      color: #cbd5e1;
+      font-style: italic;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      width: 100%;
       max-width: 1000px;
     }
 
-    h1 {
+    .card {
+      background-color: #1e293b;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
       text-align: center;
-      color: #2e86de;
-      font-size: 28px;
-      margin-bottom: 5px;
+      transition: 0.3s ease;
     }
 
-    .credit {
-      text-align: center;
-      font-size: 14px;
-      color: #7f8c8d;
-      margin-bottom: 30px;
+    .card:hover {
+      background-color: #334155;
     }
 
-    h2 {
-      color: #2e86de;
-      border-left: 6px solid #2e86de;
-      padding: 6px 12px;
-      background: #ffffff;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin-top: 30px;
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #60a5fa;
     }
 
-    .download-section {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin-bottom: 20px;
+    .card p {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      margin-bottom: 1.2rem;
     }
 
-    .app-box {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      width: 250px;
-      text-align: center;
-    }
-
-    .app-box h3 {
-      margin-bottom: 10px;
-      color: #333;
-    }
-
-    .button-download {
+    .card a.download-btn {
       display: inline-block;
-      padding: 10px 20px;
-      background-color: #2e86de;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.2s ease;
-    }
-
-    .button-download:hover {
-      background-color: #1a5fb4;
-    }
-
-    #list, #sysinfo, #missing {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 15px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-      margin: 0;
-    }
-
-    li {
-      padding: 10px 12px;
-      border-bottom: 1px solid #eaecef;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    li:last-child {
-      border-bottom: none;
-    }
-
-    .driver-name {
-      font-weight: 600;
-      color: #2c3e50;
-    }
-
-    .driver-version {
-      font-style: italic;
-      color: #7f8c8d;
-    }
-
-    .missing {
-      background-color: #fff7e6;
-      border-left: 5px solid #ff9800;
-      padding: 12px 16px;
-      margin: 10px 0;
-      border-radius: 6px;
-      transition: background-color 0.2s ease;
-    }
-
-    .missing:hover {
-      background-color: #fff2cc;
-    }
-
-    .success {
-      background-color: #e6f7ec;
-      border-left: 5px solid #4caf50;
-      padding: 12px 16px;
-      border-radius: 6px;
-    }
-
-    a {
-      color: #2980b9;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    #download-popup {
-      display: none;
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #2563eb;
+      background: #2563eb;
       color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
       font-weight: bold;
-      z-index: 9999;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .card a.download-btn:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #64748b;
     }
   </style>
-
-  <script language="VBScript">
-    Sub Window_OnLoad()
-      ListDrivers
-      ShowSystemInfo
-      SmartDriverCheck
-    End Sub
-
-    Sub ListDrivers()
-      Dim objWMI, colDrivers, drv, html
-      Set objWMI = GetObject("winmgmts:\\.\root\CIMV2")
-      Set colDrivers = objWMI.ExecQuery("SELECT * FROM Win32_PnPSignedDriver")
-
-      html = "<ul>"
-      For Each drv In colDrivers
-        If Not IsNull(drv.DeviceName) Then
-          html = html & "<li><span class='driver-name'>" & drv.DeviceName & "</span>" & _
-                 "<span class='driver-version'>" & drv.DriverVersion & "</span></li>"
-        End If
-      Next
-      html = html & "</ul>"
-      document.getElementById("list").innerHTML = html
-    End Sub
-
-    Sub ShowSystemInfo()
-      Dim objWMI, sysItems, item, html
-      Set objWMI = GetObject("winmgmts:\\.\root\CIMV2")
-      Set sysItems = objWMI.ExecQuery("SELECT * FROM Win32_ComputerSystem")
-
-      For Each item In sysItems
-        html = "<b>Manufacturer:</b> " & item.Manufacturer & "<br/>"
-        html = html & "<b>Model:</b> " & item.Model & "<br/>"
-        html = html & "<b>Total RAM:</b> " & FormatNumber(item.TotalPhysicalMemory / 1073741824, 2) & " GB<br/>"
-      Next
-
-      Set sysItems = objWMI.ExecQuery("SELECT * FROM Win32_OperatingSystem")
-      For Each item In sysItems
-        html = html & "<b>Operating System:</b> " & item.Caption & " (" & item.Version & ")<br/>"
-      Next
-
-      Set sysItems = objWMI.ExecQuery("SELECT * FROM Win32_Processor")
-      For Each item In sysItems
-        html = html & "<b>Processor:</b> " & item.Name & "<br/>"
-      Next
-
-      document.getElementById("sysinfo").innerHTML = html
-    End Sub
-
-    Sub SmartDriverCheck()
-      Dim objWMI, colDevices, colDrivers
-      Dim dev, drv, html
-      Dim installedDevices, vendorLinks, foundVendors
-      Dim matchedVendor, vendor
-
-      Set objWMI = GetObject("winmgmts:\\.\root\CIMV2")
-      Set colDevices = objWMI.ExecQuery("SELECT * FROM Win32_PnPEntity WHERE ConfigManagerErrorCode <> 0")
-      Set colDrivers = objWMI.ExecQuery("SELECT * FROM Win32_PnPSignedDriver")
-
-      Set installedDevices = CreateObject("Scripting.Dictionary")
-      For Each drv In colDrivers
-        If Not IsNull(drv.DeviceName) Then
-          installedDevices(drv.DeviceName) = True
-        End If
-      Next
-
-      Set vendorLinks = CreateObject("Scripting.Dictionary")
-      vendorLinks.Add "Intel", "https://www.intel.com/download-center/"
-      vendorLinks.Add "Realtek", "https://www.realtek.com/en/downloads"
-      vendorLinks.Add "AMD", "https://www.amd.com/en/support"
-      vendorLinks.Add "NVIDIA", "https://www.nvidia.com/Download/index.aspx"
-      vendorLinks.Add "Broadcom", "https://www.broadcom.com/support/download-search"
-      vendorLinks.Add "Qualcomm", "https://www.qualcomm.com/support"
-
-      html = ""
-      Set foundVendors = CreateObject("Scripting.Dictionary")
-
-      For Each dev In colDevices
-        If Not IsNull(dev.Name) Then
-          matchedVendor = False
-          For Each vendor In vendorLinks.Keys
-            If InStr(UCase(dev.Name), UCase(vendor)) > 0 Then
-              If Not foundVendors.Exists(vendor) Then
-                html = html & "<div class='missing'>⚠ Missing driver for <b>" & vendor & "</b> device: <i>" & dev.Name & "</i><br/>" & _
-                              "<a href='" & vendorLinks(vendor) & "' target='_blank'>Download from " & vendor & "</a></div>"
-                foundVendors.Add vendor, True
-                matchedVendor = True
-              End If
-            End If
-          Next
-          If Not matchedVendor Then
-            html = html & "<div class='missing'>Oops! Missing drivers detected on this system: <i>" & dev.Name & "</i></div>"
-          End If
-        End If
-      Next
-
-      If html = "" Then
-        html = "<div class='success'>Yeah! No missing drivers detected on this system.</div>"
-      End If
-
-      document.getElementById("missing").innerHTML = html
-    End Sub
-  </script>
 </head>
-
 <body>
-  <h1>DriverChunk Solution 2.0<br/>Dark Mode & Light Mode Versions</h1>
-  <div class="credit">Developed by Arka Nandy</div>
+  <header>
+    <h1>DriverChunk Solution 2.0</h1>
+    <h2>Dark Mode & Light Mode Versions</h2>
+    <div class="credit">Developed by Arka Nandy</div>
+  </header>
 
-  <div class="download-section">
-    <div class="app-box" id="dark-mode-app">
-      <h3>Dark Mode Version</h3>
-      <a href="DriverChunkSolution2.0-Dark.zip" class="button-download">Download</a>
+  <main>
+    <div class="card">
+      <h3>DriverChunk (Dark Mode)</h3>
+      <p>Modern dark interface with system info, driver lists, and missing driver detection.</p>
+      <a href="DriverChunkSolution2.0-Dark.zip" class="download-btn" download>Download Dark Version</a>
     </div>
-
-    <div class="app-box" id="light-mode-app">
-      <h3>Light Mode Version</h3>
-      <a href="DriverChunkSolution2.0-Light.zip" class="button-download">Download</a>
+    <div class="card">
+      <h3>DriverChunk (Light Mode)</h3>
+      <p>Bright interface with full features: system details and driver manager tools.</p>
+      <a href="DriverChunkSolution2.0-Light.zip" class="download-btn" download>Download Light Version</a>
     </div>
-  </div>
+  </main>
 
-  <h2>System Information</h2>
-  <div id="sysinfo">Gathering system info...</div>
-
-  <h2>Installed Drivers</h2>
-  <div id="list">Loading drivers...</div>
-
-  <h2>Missing Drivers & Suggestions</h2>
-  <div id="missing">Scanning devices...</div>
-
-  <div id="download-popup">Starting download...</div>
-
-  <script>
-    function showDownloadPopup(url) {
-      const popup = document.getElementById('download-popup');
-      popup.style.display = 'block';
-
-      setTimeout(() => {
-        popup.style.display = 'none';
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = '';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, 1500);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelector('#dark-mode-app a.button-download').addEventListener('click', function(e) {
-        e.preventDefault();
-        showDownloadPopup('DriverChunkSolution2.0-Dark.zip');
-      });
-
-      document.querySelector('#light-mode-app a.button-download').addEventListener('click', function(e) {
-        e.preventDefault();
-        showDownloadPopup('DriverChunkSolution2.0-Light.zip');
-      });
-    });
-  </script>
+  <footer>
+    &copy; 2025 DriverChunk. All rights reserved.
+  </footer>
 </body>
 </html>
