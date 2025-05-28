@@ -23,7 +23,7 @@
 ## 🖥️ How to Use
 
 1. **Download the file:**  
-   Save the script as `DriverChunk.hta`.
+   Extract it.
 
 2. **Double-click the file:**  
    It will launch like a Windows desktop app with a GUI.
