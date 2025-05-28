@@ -1,128 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DriverChunk Solution 2.0</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
-    }
-
     body {
-      background-color: #0f172a;
-      color: #e2e8f0;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d1117;
+      color: #c9d1d9;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 2rem;
-      min-height: 100vh;
     }
 
     header {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
 
     header h1 {
       font-size: 2.5rem;
-      color: #38bdf8;
-      margin-bottom: 0.5rem;
+      color: #58a6ff;
     }
 
-    header h2 {
-      font-size: 1.25rem;
-      color: #94a3b8;
-      margin-bottom: 0.75rem;
-    }
-
-    header .credit {
+    .credit {
       font-size: 1rem;
-      color: #cbd5e1;
-      font-style: italic;
+      color: #8b949e;
+      margin-bottom: 2rem;
     }
 
-    main {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    .apps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 2rem;
       width: 100%;
       max-width: 1000px;
     }
 
     .card {
-      background-color: #1e293b;
+      background-color: #161b22;
+      border-radius: 10px;
       padding: 1.5rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-      text-align: center;
-      transition: 0.3s ease;
+      width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .card:hover {
-      background-color: #334155;
-    }
-
-    .card h3 {
-      font-size: 1.4rem;
+    .card img {
+      max-width: 100%;
+      border-radius: 6px;
       margin-bottom: 1rem;
-      color: #60a5fa;
+    }
+
+    .card h2 {
+      color: #58a6ff;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
     }
 
     .card p {
-      font-size: 0.95rem;
-      color: #cbd5e1;
-      margin-bottom: 1.2rem;
+      text-align: center;
+      margin-bottom: 1rem;
     }
 
-    .card a.download-btn {
-      display: inline-block;
-      background: #2563eb;
+    .download-btn {
+      background-color: #238636;
       color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
       font-weight: bold;
       text-decoration: none;
-      transition: background 0.3s ease;
     }
 
-    .card a.download-btn:hover {
-      background: #1d4ed8;
+    .download-btn:hover {
+      background-color: #2ea043;
     }
 
-    footer {
-      margin-top: 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #64748b;
+    .readme {
+      margin-top: 3rem;
+      background-color: #161b22;
+      padding: 1.5rem;
+      border-radius: 8px;
+      max-width: 800px;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .readme h3 {
+      color: #58a6ff;
+      margin-bottom: 1rem;
+    }
+
+    .readme p {
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>DriverChunk Solution 2.0</h1>
-    <h2>Dark Mode & Light Mode Versions</h2>
+    <h1>DriverChunk Solution 2.0<br />Dark Mode & Light Mode Versions</h1>
     <div class="credit">Developed by Arka Nandy</div>
   </header>
 
-  <main>
+  <div class="apps">
     <div class="card">
-      <h3>DriverChunk (Dark Mode)</h3>
-      <p>Modern dark interface with system info, driver lists, and missing driver detection.</p>
-      <a href="DriverChunkSolution2.0-Dark.zip" class="download-btn" download>Download Dark Version</a>
+      <img src="darkmode-screenshot.png" alt="Dark Mode Screenshot" />
+      <h2>Dark Mode</h2>
+      <p>System Info, Installed & Required Drivers - optimized for dark environments.</p>
+      <a class="download-btn" href="DriverChunkSolution2.0-Dark.zip" download>Download Dark Version</a>
     </div>
-    <div class="card">
-      <h3>DriverChunk (Light Mode)</h3>
-      <p>Bright interface with full features: system details and driver manager tools.</p>
-      <a href="DriverChunkSolution2.0-Light.zip" class="download-btn" download>Download Light Version</a>
-    </div>
-  </main>
 
-  <footer>
-    &copy; 2025 DriverChunk. All rights reserved.
-  </footer>
+    <div class="card">
+      <img src="lightmode-screenshot.png" alt="Light Mode Screenshot" />
+      <h2>Light Mode</h2>
+      <p>System Info, Installed & Required Drivers - ideal for daylight usage.</p>
+      <a class="download-btn" href="DriverChunkSolution2.0-Light.zip" download>Download Light Version</a>
+    </div>
+  </div>
+
+  <section class="readme">
+    <h3>README</h3>
+    <p>
+      DriverChunk Solution 2.0 is a dual-themed (Dark & Light) utility designed for Windows users to:
+      <ul>
+        <li>Display complete system information (CPU, RAM, OS, Processor)</li>
+        <li>List all currently installed drivers with version details</li>
+        <li>Identify missing or required drivers</li>
+        <li>Provide vendor-specific links for driver downloads</li>
+      </ul>
+    </p>
+    <p>
+      These applications are provided for free, and are delivered in HTA (HTML Application) format. They run natively
+      on Windows systems. Make sure to run them only on trusted environments and always scan for malware if downloaded
+      from third-party sources.
+    </p>
+  </section>
+
 </body>
 </html>
