@@ -25,6 +25,7 @@
       flex-direction: column;
       align-items: center;
       padding: 1rem;
+      overflow-x: hidden;
     }
 
     header {
@@ -44,9 +45,99 @@
       user-select: none;
     }
 
-    main {
+    /* Login/Signup Section */
+    #login-signup {
+      background-color: #1e293b;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.85);
+      max-width: 400px;
+      width: 100%;
+      color: #cbd5e1;
+      margin-bottom: 2rem;
+    }
+
+    #login-signup h2 {
+      color: #60a5fa;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      box-shadow: 0 0 0 3px #60a5fa;
+    }
+
+    button {
+      background-color: #2563eb;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover,
+    button:focus {
+      background-color: #1d4ed8;
+      box-shadow: 0 7px 20px rgba(29,78,216,0.9);
+      outline: none;
+    }
+
+    #toggle-forms {
+      text-align: center;
+      color: #60a5fa;
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    #toggle-forms:hover {
+      text-decoration: underline;
+    }
+
+    #error-message {
+      color: #f87171;
+      font-weight: 700;
+      text-align: center;
+      min-height: 1.2rem;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+
+    /* Main Content Section */
+    #main-content {
       max-width: 900px;
       width: 100%;
+      display: none; /* Hidden until login */
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    main {
       display: flex;
       gap: 2rem;
       flex-wrap: wrap;
@@ -114,6 +205,8 @@
       box-shadow: 0 5px 14px rgba(37,99,235,0.85);
       user-select: none;
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      display: inline-block;
     }
 
     a.button-download:hover,
@@ -182,6 +275,10 @@
         flex: none;
         width: 100%;
       }
+
+      #login-signup {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
@@ -193,46 +290,81 @@
 </header>
 <div id="credit">Developed by Arka Nandy</div>
 
-<main>
-  <section class="app-version" id="dark-mode-app">
-    <img src="darkmode-screenshot.png" alt="DriverChunk Solution 2.0 (Dark) Screenshot" />
-    <h2>DriverChunk Solution 2.0 (Dark)</h2>
-    <p class="description">
-      This version includes <strong>System Information</strong> and <strong>Installed & Required Drivers</strong> modules,
-      all styled with a sleek dark mode theme for comfortable viewing in low light.
-    </p>
-    <p class="features">
-      • Displays CPU, memory, disk, and system info<br />
-      • Shows installed device drivers and flags missing drivers
-    </p>
-    <a href="DriverChunkSolution2.0-Dark.zip" class="button-download" download>Download DriverChunk Solution 2.0 (Dark)</a>
-  </section>
+<!-- Login and Signup Section -->
+<section id="login-signup" aria-label="Login and Signup Section">
+  <h2 id="form-title">Sign In</h2>
 
-  <section class="app-version" id="light-mode-app">
-    <img src="lightmode-screenshot.png" alt="DriverChunk Solution 2.0 (Light) Screenshot" />
-    <h2>DriverChunk Solution 2.0 (Light)</h2>
-    <p class="description">
-      This version features the same <strong>System Information</strong> and <strong>Installed & Required Drivers</strong> functionality,
-      presented in a bright and clean light mode theme for easy daytime use.
-    </p>
-    <p class="features">
-      • Displays CPU, memory, disk, and system info<br />
-      • Shows installed device drivers and flags missing drivers
-    </p>
-    <a href="DriverChunkSolution2.0-Light.zip" class="button-download" download>Download DriverChunk Solution 2.0 (Light)</a>
-  </section>
-</main>
+  <div id="error-message" role="alert" aria-live="assertive"></div>
 
-<section class="about" aria-label="About DriverChunk Solution">
-  <h2>About Us</h2>
-  <p>
-    DriverChunk Solution is designed to simplify the management of your PC’s drivers and system information.
-    It helps detect missing or outdated drivers and provides easy access to trusted driver sources.
-    This project is developed and maintained by Arka Nandy with the goal of making driver management accessible and reliable.
-  </p>
+  <!-- Sign In Form -->
+  <form id="signin-form">
+    <label for="signin-username">Username</label>
+    <input type="text" id="signin-username" autocomplete="username" required />
+
+    <label for="signin-password">Password</label>
+    <input type="password" id="signin-password" autocomplete="current-password" required />
+
+    <button type="submit">Sign In</button>
+  </form>
+
+  <!-- Sign Up Form (hidden initially) -->
+  <form id="signup-form" style="display:none;">
+    <label for="signup-username">Username</label>
+    <input type="text" id="signup-username" autocomplete="username" required />
+
+    <label for="signup-password">Password</label>
+    <input type="password" id="signup-password" autocomplete="new-password" required />
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <div id="toggle-forms" tabindex="0" role="button" aria-pressed="false" aria-label="Toggle between Sign In and Sign Up">
+    Don't have an account? Sign Up
+  </div>
 </section>
 
-<section class="readme" aria-label="Readme Information">
+<!-- Main Content -->
+<section id="main-content" tabindex="-1" aria-label="Main DriverChunk Solution Content">
+  <main>
+    <section class="app-version" id="dark-mode-app">
+      <img src="darkmode-screenshot.png" alt="DriverChunk Solution 2.0 (Dark) Screenshot" />
+      <h2>DriverChunk Solution 2.0 (Dark)</h2>
+      <p class="description">
+        This version includes <strong>System Information</strong> and <strong>Installed & Required Drivers</strong> modules,
+        all styled with a sleek dark mode theme for comfortable viewing in low light.
+      </p>
+      <p class="features">
+        • Displays CPU, memory, disk, and system info<br />
+        • Shows installed device drivers and flags missing drivers
+      </p>
+      <a href="DriverChunkSolution2.0-Dark.zip" class="button-download" download>Download DriverChunk Solution 2.0 (Dark)</a>
+    </section>
+
+    <section class="app-version" id="light-mode-app">
+      <img src="lightmode-screenshot.png" alt="DriverChunk Solution 2.0 (Light) Screenshot" />
+      <h2>DriverChunk Solution 2.0 (Light)</h2>
+      <p class="description">
+        This version features the same <strong>System Information</strong> and <strong>Installed & Required Drivers</strong> functionality,
+        presented in a bright and clean light mode theme for easy daytime use.
+      </p>
+      <p class="features">
+        • Displays CPU, memory, disk, and system info<br />
+        • Shows installed device drivers and flags missing drivers
+      </p>
+      <a href="DriverChunkSolution2.0-Light.zip" class="button-download" download>Download DriverChunk Solution 2.0 (Light)</a>
+    </section>
+  </main>
+
+  <section class="about" aria-label="About DriverChunk Solution">
+    <h2>About Us</h2>
+    <p>
+      DriverChunk Solution is designed to simplify the management of your PC’s drivers and system information.
+      It helps detect missing or outdated drivers and provides easy access to trusted driver sources.
+      This project is developed and maintained by Arka Nandy with the goal of making driver management accessible and reliable.
+    </p>
+  </section>
+
+  <section class="readme" aria-label="Readme Information">
 DriverChunk Solution 2.0
 
 Features:
@@ -248,13 +380,160 @@ Disclaimer:
 Use at your own risk. Always keep backups and update your antivirus software.
   </section>
 
-<section class="notice" role="alert" aria-live="polite">
-  <strong>Important:</strong> HTA files are Windows HTML Applications that run scripts on your PC. Please run only trusted files. Use antivirus software and keep your system updated.
+  <section class="notice" role="alert" aria-live="polite">
+    <strong>Important:</strong> HTA files are Windows HTML Applications that run scripts on your PC. Please run only trusted files. Use antivirus software and keep your system updated.
+  </section>
 </section>
 
 <footer>
   © 2025 Arka Nandy. All rights reserved.
 </footer>
+
+<script>
+  // Elements references
+  const signinForm = document.getElementById('signin-form');
+  const signupForm = document.getElementById('signup-form');
+  const toggleFormsBtn = document.getElementById('toggle-forms');
+  const loginSignupSection = document.getElementById('login-signup');
+  const mainContentSection = document.getElementById('main-content');
+  const errorMessage = document.getElementById('error-message');
+  const formTitle = document.getElementById('form-title');
+
+  // Utility: Get users object from localStorage or empty object
+  function getUsers() {
+    const usersJSON = localStorage.getItem('users');
+    return usersJSON ? JSON.parse(usersJSON) : {};
+  }
+
+  // Utility: Save users object to localStorage
+  function saveUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+
+  // Utility: Save last logged-in user credentials
+  function setLastUser(username, password) {
+    localStorage.setItem('lastUser', JSON.stringify({ username, password }));
+  }
+
+  // Utility: Load last user and pre-fill sign-in inputs if any
+  function loadLastUser() {
+    const lastUserJSON = localStorage.getItem('lastUser');
+    if (lastUserJSON) {
+      try {
+        const lastUser = JSON.parse(lastUserJSON);
+        if (lastUser.username && lastUser.password) {
+          document.getElementById('signin-username').value = lastUser.username;
+          document.getElementById('signin-password').value = lastUser.password;
+        }
+      } catch {
+        // Ignore JSON parse errors
+      }
+    }
+  }
+
+  // Toggle between Sign In and Sign Up forms
+  function toggleForms() {
+    errorMessage.textContent = '';
+    if (signinForm.style.display !== 'none') {
+      signinForm.style.display = 'none';
+      signupForm.style.display = 'flex';
+      formTitle.textContent = 'Sign Up';
+      toggleFormsBtn.textContent = 'Already have an account? Sign In';
+      toggleFormsBtn.setAttribute('aria-pressed', 'true');
+    } else {
+      signinForm.style.display = 'flex';
+      signupForm.style.display = 'none';
+      formTitle.textContent = 'Sign In';
+      toggleFormsBtn.textContent = "Don't have an account? Sign Up";
+      toggleFormsBtn.setAttribute('aria-pressed', 'false');
+    }
+  }
+
+  toggleFormsBtn.addEventListener('click', toggleForms);
+  toggleFormsBtn.addEventListener('keypress', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleForms();
+    }
+  });
+
+  // Handle Sign Up form submission
+  signupForm.addEventListener('submit', e => {
+    e.preventDefault();
+    errorMessage.textContent = '';
+
+    const username = document.getElementById('signup-username').value.trim();
+    const password = document.getElementById('signup-password').value;
+
+    if (!username || !password) {
+      errorMessage.textContent = 'Please enter both username and password.';
+      return;
+    }
+
+    let users = getUsers();
+
+    if (users[username]) {
+      errorMessage.textContent = 'Username already exists. Please choose another.';
+      return;
+    }
+
+    users[username] = password;
+    saveUsers(users);
+
+    errorMessage.style.color = '#22c55e'; // green success
+    errorMessage.textContent = 'Account created successfully! You can now sign in.';
+
+    // Clear signup inputs
+    signupForm.reset();
+
+    // Switch to sign-in form after short delay
+    setTimeout(() => {
+      errorMessage.style.color = '#f87171'; // reset to error color
+      toggleForms();
+    }, 1800);
+  });
+
+  // Handle Sign In form submission
+  signinForm.addEventListener('submit', e => {
+    e.preventDefault();
+    errorMessage.textContent = '';
+
+    const username = document.getElementById('signin-username').value.trim();
+    const password = document.getElementById('signin-password').value;
+
+    if (!username || !password) {
+      errorMessage.textContent = 'Please enter both username and password.';
+      return;
+    }
+
+    const users = getUsers();
+
+    if (!users[username]) {
+      errorMessage.textContent = 'Username does not exist. Please sign up first.';
+      return;
+    }
+
+    if (users[username] !== password) {
+      errorMessage.textContent = 'Incorrect password. Please try again.';
+      return;
+    }
+
+    // Successful login
+    setLastUser(username, password);
+
+    // Hide login/signup and show main content
+    loginSignupSection.style.display = 'none';
+    mainContentSection.style.display = 'flex';
+
+    // Accessibility: set focus on main content
+    mainContentSection.focus();
+  });
+
+  // On page load
+  window.addEventListener('DOMContentLoaded', () => {
+    loadLastUser();
+  });
+</script>
 
 </body>
 </html>
